@@ -240,9 +240,9 @@ function DashboardContent() {
       }
     } catch (error) {
       console.error("Analysis failed:", error);
-      alert(
-        "Could not extract data from this site. It might be blocking scrapers.",
-      );
+      // alert(
+        // "Could not extract data from this site. It might be blocking scrapers.",
+      // );
     } finally {
       setIsLoading(false);
     }
