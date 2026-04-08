@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+// import { prisma } from "@/lib/prisma";
 
 // Force Dynamic ensures Next.js doesn't cache the feedback list
 export const dynamic = "force-dynamic";
