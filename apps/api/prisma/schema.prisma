@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+  plan  String @default("free") // "free", "pro", "studio"
+  name          String?    // 👈 Add this if missing
+  image         String?    // 👈 Add this for the profile photo URL
+  accentColor   String    @default("#2563EB")
+
+  // 📈 Analysis Counter Logic
+  analysisCount Int      @default(0)
+  lastResetDate DateTime @default(now())
+
+  // Relation to their saved analyses
+  analyses Analysis[]
+  feedbacks     Feedback[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Analysis {
+  id         String      @id @default(uuid())
+  url        String      @unique
+  domain     String
+  status     String      @default("completed")
+  title      String?
+  data       Json // Stores the full array of elements captured
+  screenshot String?
+  createdAt  DateTime    @default(now())
+  components Component[] // Relates saved components to this analysis
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Component {
+  id         String    @id @default(uuid())
+  analysisId String? // Optional: Link to the analysis it was saved from
+  analysis   Analysis? @relation(fields: [analysisId], references: [id])
+  tag        String
+  text       String?
+  styles     Json? // Changed to Json for easier handling
+  html       String?
+  assetCode  String? // For SVGs
+  assetUrl   String? // For PNGs
+  createdAt  DateTime  @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  name      String?
+  email     String?
+  rating    Int      // 1-5 for emojis
+  category  String   // "BUG", "UI/UX", "FEATURE", "OTHER"
+  message   String
+  createdAt DateTime @default(now())
+}
