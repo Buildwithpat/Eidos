@@ -1,20 +1,21 @@
+// apps/web/src/components/ExtensionPromo.jsx (or wherever this file lives)
+
 "use client";
 
 import React from "react";
 import { FiDownload } from "react-icons/fi";
 
 export default function ExtensionPromo() {
-  const driveLink =
-    "https://drive.google.com/file/d/1lW1BOzGQMMwKKO3XBmLT8yxmg1Zpr9-A/view?usp=sharing";
+  // ✅ 1. Replace the Google Drive link with your GitHub Release Direct Link
+  // Right-click the .zip file in your GitHub Release assets and select "Copy Link Address"
+  const githubDownloadLink =
+    "https://github.com/Buildwithpat/Eidos/releases/download/v1.0.0/eidos-extension.zip.zip";
 
   return (
     <section className="relative z-20 pb-20 px-6 max-w-6xl mx-auto text-center">
       {/* --- REFINED DOWNLOAD BOX --- */}
       <div className="relative group inline-block w-full max-w-4xl mx-auto">
-        {" "}
-        {/* Added max-w-4xl here */}
         <div className="absolute -inset-1 bg-blue-600/5 rounded-[32px] blur-2xl opacity-30 group-hover:opacity-60 transition duration-1000" />
-        {/* Structural Change: Reduced opacity (bg-[#09090B]/60) and tighter padding (p-10) */}
         <div className="relative bg-[#09090B]/60 border border-white/5 backdrop-blur-xl rounded-[32px] p-10 flex flex-col items-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-tight">
             Get the <span className="text-blue-500">Eidos Beta</span>
@@ -26,10 +27,10 @@ export default function ExtensionPromo() {
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-4">
+            {/* ✅ 2. Updated the href and added the 'download' attribute */}
             <a
-              href={driveLink}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={githubDownloadLink}
+              download="eidos-extension.zip" // Forces the browser to download
               className="flex items-center gap-3 bg-blue-600 text-white px-8 py-3.5 rounded-2xl font-bold text-base hover:bg-blue-500 transition-all shadow-lg hover:shadow-blue-500/20"
             >
               Download Eidos Pack (.zip)
@@ -46,8 +47,8 @@ export default function ExtensionPromo() {
             1
           </div>
           <p className="text-white/40 text-[13px] text-center leading-relaxed">
-            Unzip the <span className="text-white/60">Eidos-Pack</span> folder
-            to your Desktop.
+            Unzip the <span className="text-white/60">eidos-extension</span>{" "}
+            folder to your Desktop.
           </p>
         </div>
         <div className="flex flex-col items-center">
