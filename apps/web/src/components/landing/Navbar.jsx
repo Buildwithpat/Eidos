@@ -77,7 +77,7 @@ export default function Navbar() {
         </div>
 
         {/* --- CTA ACTIONS --- */}
-        <div className="flex items-center gap-6">
+        <div className="hidden md:flex flex items-center gap-6">
           <Image
             src="/bwp-logo.svg"
             alt="BWP Logo"

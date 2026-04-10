@@ -22,6 +22,13 @@ export default function LandingPage() {
 
   const handleAnalyze = (e) => {
     if (e) e.preventDefault();
+
+    // 1. Desktop Check: Prevent function from running on mobile/tablet
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      alert("Eidos analysis is currently only available on Desktop.");
+      return;
+    }
+
     if (!url) return;
 
     // Check authentication status
@@ -59,7 +66,7 @@ export default function LandingPage() {
         </p>
 
         {/* 3. SEARCH BAR */}
-        <div className="mt-16 w-full max-w-3xl relative px-4">
+        <div className="hidden md:block mt-16 w-full max-w-3xl relative px-4">
           <div className="absolute -inset-2 bg-blue-500/10 blur-3xl rounded-full opacity-50" />
 
           <div className="relative flex items-center bg-white/[0.08] border border-white/[0.12] backdrop-blur-md rounded-[28px] p-2.5 pl-6 shadow-2xl">
@@ -84,6 +91,10 @@ export default function LandingPage() {
               Analyze
             </button>
           </div>
+        </div>
+
+        <div className="md:hidden mt-12 rounded-full border border-blue-600/30 bg-blue-600/10 px-6 py-3 text-sm text-blue-400 font-medium">
+          Open on Desktop to start analyzing 💻
         </div>
 
         {/* Footer Support Text */}
